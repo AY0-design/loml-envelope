@@ -64,8 +64,8 @@ body {
 .paper::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 0; width: 1.5px; background: rgba(190, 80, 70, .25); }
 
 .lines { padding-left: 12px; }
-.l { font-size: 30px; line-height: 43px; margin-bottom: 43px; color: var(--ink); opacity: 0; }
-.l.date { font-size: 26px; text-align: right; }
+.l { font-size: 30px; line-height: 43px; margin-bottom: 43px; color: var(--ink); }
+.l.date { font-size: 26px; text-align: right; opacity: .7; }
 .l.greet { font-weight: 600; font-size: 37px; }
 .l.big { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; font-size: 32px; color: var(--accent); }
 .l.sign { font-size: 35px; margin-bottom: 12px; }

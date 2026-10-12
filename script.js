@@ -5,7 +5,6 @@
   const back = env.querySelector('.env-back'), front = env.querySelector('.env-front');
   const flapOut = flap.querySelector('.flap-out'), flapIn = flap.querySelector('.flap-in');
   const paper = letter.querySelector('.paper');
-  const lines = [...letter.querySelectorAll('.l')];
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -18,7 +17,7 @@
   const POSE = (x, y, k) => `translate(${x}px, ${y}px) scale(${k})`;
   const DROP = '0 55vh';
 
-  const els = [heart, flap, flapOut, flapIn, back, front, shadow, scene, letter, again, ...lines];
+  const els = [heart, flap, flapOut, flapIn, back, front, shadow, scene, letter, again];
   const ms = (t) => (reduce ? 0 : t);
   const play = (el, keyframes, { duration, delay = 0, easing = 'linear' }) =>
     el.animate(keyframes, { duration: ms(duration), delay: ms(delay), easing, fill: 'both' });
@@ -84,11 +83,6 @@
       play(el, [{ translate: '0 0', opacity: 1 }, { translate: DROP, opacity: 0 }], { duration: 520, delay: 1250, easing: INOUT });
     }
 
-    // 6. handwriting fades in, line by line, after the letter has landed
-    lines.forEach((l, i) => {
-      const end = l.classList.contains('date') ? 0.7 : 1;
-      play(l, [{ opacity: 0 }, { opacity: end }], { duration: 450, delay: 2000 + i * 110, easing: OUT });
-    });
 
     await wait(600 + T + 150);
     if (state !== 'opening') return;
@@ -106,7 +100,6 @@
     letter.classList.remove('scroll');
     paper.scrollTop = 0;
 
-    lines.forEach((l) => play(l, [{ opacity: l.classList.contains('date') ? 0.7 : 1 }, { opacity: 0 }], { duration: 140 }));
 
     // letter lifts back above the pocket, envelope returns, letter slides home, flap closes, heart clips back on
     play(letter, [{ transform: geo.final }, { transform: POSE(0, RISE_Y, KR) }], { duration: 600, easing: INOUT });
