@@ -20,7 +20,7 @@
     letter.style.transform = prev; void letter.offsetWidth; letter.style.transition = '';
     letter.style.removeProperty('transform');
     const vw = innerWidth, vh = innerHeight;
-    const s = Math.min((vw * 0.94) / r.width, (vh * 0.9) / r.height, 1.5);
+    const s = Math.min((vw * 0.94) / r.width, (vh * 0.9) / r.height, 1);
     const dx = vw / 2 - (r.left + r.width / 2);
     const dy = vh / 2 - (r.top + r.height / 2);
     letter.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
@@ -45,6 +45,7 @@
       letter.classList.add('glide', 'reading');
       document.body.classList.add('reading');
       center();
+      later(() => { if (state === 'reading') letter.classList.add('scroll'); }, 1400);       // scrolling only after it has landed
       state = 'reading';
       again.hidden = false;
     }, 2300);
@@ -60,7 +61,7 @@
     letter.style.transform = '';
     later(() => {
       clip.classList.remove('free', 'front');
-      letter.classList.remove('glide', 'reading');
+      letter.classList.remove('glide', 'reading', 'scroll');
       letter.classList.remove('rise');                          // slides back down inside
       later(() => { env.classList.remove('open'); scene.classList.remove('opened'); state = 'closed'; }, 700);
     }, 1200);
