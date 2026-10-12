@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Letter for Tosin</title>
+<meta name="description" content="A little letter, just for you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="stage" id="stage">
+  <div class="scene" id="scene">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the letter">
+      <div class="env-back"></div>
+
+      <article class="letter" id="letter" aria-live="polite">
+        <div class="paper">
+          <div class="lines">
+            <p class="l date">October 12</p>
+            <p class="l greet">Dear Tosin,</p>
+            <p class="l big">I love you, Tosin, and I am really, super proud of&nbsp;you.</p>
+            <p class="l">There are great heights to climb, and I can already see you standing on top of them.</p>
+            <p class="l">I've watched you work when nobody was clapping, keep going when it was heavy, and stay kind while doing it. That is rare, and it's exactly why I'm so proud.</p>
+            <p class="l">Some days the climb will feel steep and the top will feel far. On those days, remember how far you've already come. Every step counted, even the small and quiet ones.</p>
+            <p class="l">Be patient with yourself. Rest when you need to, but don't stop dreaming. You are more capable than you know, and the best of you is still unfolding.</p>
+            <p class="l">Whatever mountain is next, I'll be right here cheering the loudest, with a hand to hold and a heart that's yours.</p>
+            <p class="l">Go and climb, my love.</p>
+            <p class="l sign">Always yours,<br><span class="heart">&hearts;</span></p>
+          </div>
+        </div>
+      </article>
+
+      <div class="env-side left"></div>
+      <div class="env-side right"></div>
+      <div class="env-bottom"></div>
+
+      <div class="flap" id="flap">
+        <div class="flap-face flap-out"></div>
+        <div class="flap-face flap-in"></div>
+      </div>
+      <div class="seal" id="seal" aria-hidden="true"><span>&hearts;</span></div>
+    </div>
+    <p class="hint" id="hint">tap to open</p>
+  </div>
+  <button class="again" id="again" aria-label="Close the letter" hidden>Fold it back</button>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
