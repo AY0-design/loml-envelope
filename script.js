@@ -7,7 +7,7 @@
   letter.querySelectorAll('.l').forEach((el, i) => el.style.setProperty('--i', i));
 
   const fit = () => {
-    const w = Math.min(1, (innerWidth - 32) / 340);
+    const w = Math.min(1, (innerWidth - 32) / 400);
     scene.style.setProperty('--fit', w);
   };
   fit(); addEventListener('resize', fit);

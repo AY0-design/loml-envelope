@@ -1,13 +1,13 @@
 :root {
-  --bg: #f3e9dc;
-  --bg2: #e8d8c3;
+  --bg: #fffaf0;
+  --bg2: #fbeccb;
   --env: #f7efe4;
   --env-shade: #e9dac5;
   --env-flap: #f0e3d0;
   --ink: #3b2f2a;
-  --accent: #b5483a;
-  --ew: 340px;
-  --eh: 230px;
+  --accent: #d4357f;
+  --ew: 400px;
+  --eh: 253.6px;
   --ease: cubic-bezier(.22, .8, .24, 1);
 }
 * { box-sizing: border-box; margin: 0; }
@@ -26,44 +26,39 @@ body {
 .envelope {
   position: relative; width: 100%; height: 100%;
   cursor: pointer; outline: none; perspective: 1000px;
-  filter: drop-shadow(0 18px 24px rgba(80, 50, 30, .22));
+  filter: drop-shadow(0 14px 18px rgba(80, 50, 30, .16));
   animation: float 4s ease-in-out infinite;
 }
 .envelope:focus-visible { outline: 2px dashed var(--accent); outline-offset: 10px; }
 @keyframes float { 50% { transform: translateY(-6px); } }
 .envelope.open, .envelope.dropped { animation: none; cursor: default; }
 
-.env-back { position: absolute; inset: 0; background: var(--env-shade); border-radius: 6px; }
-.env-side, .env-bottom { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
-.env-side.left  { background: linear-gradient(90deg, #efe2cf, var(--env)); clip-path: polygon(0 0, 52% 54%, 0 100%); }
-.env-side.right { background: linear-gradient(270deg, #efe2cf, var(--env)); clip-path: polygon(100% 0, 48% 54%, 100% 100%); }
-.env-bottom { background: linear-gradient(180deg, var(--env), #f1e5d3); clip-path: polygon(0 100%, 50% 48%, 100% 100%); border-radius: 0 0 6px 6px; }
+.env-back, .env-front { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.env-front { z-index: 4; pointer-events: none; }
 
 .flap {
-  position: absolute; left: 0; top: 0; width: 100%; height: 56%;
-  transform-origin: top center; transform-style: preserve-3d;
+  position: absolute; left: 0; top: 0; width: 100%; height: 62.39%;
+  transform-origin: 50% 0.93%; transform-style: preserve-3d;
   transition: transform .8s cubic-bezier(.3, .7, .3, 1), z-index 0s .3s;
   z-index: 6;
 }
-.flap-face { position: absolute; inset: 0; backface-visibility: hidden; clip-path: polygon(0 0, 100% 0, 50% 100%); border-radius: 6px 6px 0 0; }
-.flap-out { background: linear-gradient(180deg, #f6ecdd, var(--env-flap)); }
-.flap-in  { background: linear-gradient(0deg, #d9c7ac, #e6d6bf); transform: rotateX(180deg); }
+.flap-face { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; backface-visibility: hidden; }
+.flap-in { transform: rotateX(180deg); }
 .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
 
 .seal {
-  position: absolute; left: 50%; top: 56%; width: 56px; height: 63px; margin: -40px 0 0 -28px; z-index: 7;
-  filter: drop-shadow(0 4px 4px rgba(60, 20, 10, .35)); transform-origin: 50% 0;
+  position: absolute; left: 50%; top: 50%; width: 22.1%; height: auto; z-index: 7; transform: translate(-50%, -50%);
+  transform-origin: 50% 0; filter: none;
   transition: transform .7s cubic-bezier(.5, 0, .75, 0), opacity .5s ease .15s;
 }
-.seal svg { display: block; }
-.envelope.open .seal { transform: translateY(70px) rotate(24deg) scale(.9); opacity: 0; }
+.envelope.open .seal { transform: translate(-50%, 90%) rotate(24deg) scale(.9); opacity: 0; }
 
 /* ---------- letter ---------- */
 /* the clip window ends at the envelope's bottom edge, so the letter looks tucked inside */
 .letter-clip { position: absolute; left: 0; right: 0; bottom: 0; height: 900px; overflow: hidden; z-index: 3; pointer-events: none; }
 .letter-clip.free { overflow: visible; z-index: 20; }
 .letter {
-  position: absolute; left: 20px; width: calc(100% - 40px); height: 480px; top: calc(100% - var(--eh) + 26px);
+  position: absolute; left: 20px; width: calc(100% - 40px); height: 480px; top: calc(100% - var(--eh) + 22px);
   transform: translateY(0); will-change: transform; transition: transform 1.1s cubic-bezier(.6, 0, .25, 1);
 }
 .letter.rise { transform: translateY(-400px); transition: transform 1.15s cubic-bezier(.6, 0, .25, 1); }
@@ -73,7 +68,7 @@ body {
 .envelope > :where(:not(.letter-clip)) { transition: translate 1s cubic-bezier(.5, 0, .75, 0), opacity .7s ease; }
 
 .paper {
-  height: 100%; padding: 22px 22px 28px; border-radius: 3px;
+  height: 100%; padding: 22px 22px 28px; border-radius: 4px; border: 2.5px solid #000;
   background:
     repeating-linear-gradient(180deg, transparent 0 29px, rgba(120, 140, 170, .22) 29px 30px),
     linear-gradient(180deg, #fffdf8, #fbf5ea);
@@ -89,7 +84,7 @@ body {
 .l.greet { font-weight: 600; font-size: 26px; }
 .l.big { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; font-size: 22px; color: var(--accent); }
 .l.sign { font-size: 24px; margin-bottom: 8px; }
-.heart { color: var(--accent); }
+.heart { color: #F965A7; }
 .reading .l { animation: ink .9s var(--ease) forwards; animation-delay: calc(var(--i) * 0.45s + .5s); }
 .reduce .l { opacity: 1; transform: none; animation: none !important; }
 @keyframes ink { to { opacity: 1; transform: none; } }
