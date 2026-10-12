@@ -69,18 +69,18 @@
     // 3. scene settles lower so the risen letter has room above the envelope
     play(scene, [{ translate: '0 0px' }, { translate: `0 ${geo.L}px` }], { duration: 800, delay: 120, easing: OUT });
 
-    // 4. letter slides straight up (and unfolds a little), rests a beat, then glides to the centre
-    const T = 750 + 120 + 700;
+    // 4. letter slides up and grows as it comes out (mirror of the way back), rests a beat, then glides to the centre
+    const T = 700 + 100 + 700;
     play(letter, [
-      { transform: POSE(0, 0, K0), offset: 0, easing: OUT },
-      { transform: POSE(0, RISE_Y, KR), offset: 750 / T },
-      { transform: POSE(0, RISE_Y, KR), offset: 870 / T, easing: INOUT },
+      { transform: POSE(0, 0, K0), offset: 0, easing: INOUT },
+      { transform: POSE(0, RISE_Y, KR), offset: 700 / T },
+      { transform: POSE(0, RISE_Y, KR), offset: 800 / T, easing: INOUT },
       { transform: geo.final, offset: 1 },
     ], { duration: T, delay: 600 });
 
     // 5. envelope slips away downward while the letter is gliding
     for (const el of [back, front, flap, shadow]) {
-      play(el, [{ translate: '0 0', opacity: 1 }, { translate: DROP, opacity: 0 }], { duration: 520, delay: 1250, easing: INOUT });
+      play(el, [{ translate: '0 0', opacity: 1 }, { translate: DROP, opacity: 0 }], { duration: 520, delay: 1300, easing: INOUT });
     }
 
 
