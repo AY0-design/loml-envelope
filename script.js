@@ -37,17 +37,17 @@
     scene.classList.add('opened');
     env.setAttribute('aria-label', 'Letter opened');
     env.classList.add('open');                                  // 1. heart clip drops, flap swings open
-    later(() => letter.classList.add('rise'), 550);             // 2. letter slides straight up out of the pocket
-    later(() => {                                               // 3. letter glides to centre, envelope falls away
+    later(() => letter.classList.add('rise'), 650);             // 2. letter slides straight up out of the pocket
+    later(() => env.classList.add('dropped'), 2000);            // 3. envelope slides away, letter hangs behind it
+    later(() => {                                               // 4. letter glides forward to the centre of the screen
       clip.classList.add('free');
       letter.classList.remove('rise');
       letter.classList.add('glide', 'reading');
-      env.classList.add('dropped');
       document.body.classList.add('reading');
       center();
       state = 'reading';
       again.hidden = false;
-    }, 1850);
+    }, 2300);
   };
 
   const close = () => {
@@ -59,7 +59,7 @@
     letter.classList.add('rise');                               // letter glides back above the pocket
     letter.style.transform = '';
     later(() => {
-      clip.classList.remove('free');
+      clip.classList.remove('free', 'front');
       letter.classList.remove('glide', 'reading');
       letter.classList.remove('rise');                          // slides back down inside
       later(() => { env.classList.remove('open'); scene.classList.remove('opened'); state = 'closed'; }, 700);
