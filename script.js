@@ -18,6 +18,7 @@
     letter.style.transition = 'none'; letter.style.transform = 'none';
     const r = letter.getBoundingClientRect();
     letter.style.transform = prev; void letter.offsetWidth; letter.style.transition = '';
+    letter.style.removeProperty('transform');
     const vw = innerWidth, vh = innerHeight;
     const s = Math.min((vw * 0.94) / r.width, (vh * 0.9) / r.height, 1.5);
     const dx = vw / 2 - (r.left + r.width / 2);
@@ -29,32 +30,40 @@
   const timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, reduce ? 0 : ms));
 
+  const clip = $('clip');
   const open = () => {
     if (state !== 'closed') return;
     state = 'opening';
     scene.classList.add('opened');
     env.setAttribute('aria-label', 'Letter opened');
-    env.classList.add('open');                       // 1. flap flips back
-    later(() => env.classList.add('out'), 650);      // 2. letter slides straight up
-    later(() => {                                    // 3. letter glides to centre, envelope drops away
-      env.classList.add('reading', 'dropped');
-      letter.classList.add('reading');
+    env.classList.add('open');                                  // 1. heart clip drops, flap swings open
+    later(() => letter.classList.add('rise'), 550);             // 2. letter slides straight up out of the pocket
+    later(() => {                                               // 3. letter glides to centre, envelope falls away
+      clip.classList.add('free');
+      letter.classList.remove('rise');
+      letter.classList.add('glide', 'reading');
+      env.classList.add('dropped');
       document.body.classList.add('reading');
       center();
       state = 'reading';
       again.hidden = false;
-    }, 1800);
+    }, 1850);
   };
 
   const close = () => {
     if (state !== 'reading') return;
     state = 'closing';
     again.hidden = true;
-    letter.style.transform = '';
-    letter.classList.remove('reading');
     document.body.classList.remove('reading');
-    env.classList.remove('reading', 'out', 'dropped');
-    later(() => { env.classList.remove('open'); scene.classList.remove('opened'); state = 'closed'; }, 900);
+    env.classList.remove('dropped');                            // envelope returns
+    letter.classList.add('rise');                               // letter glides back above the pocket
+    letter.style.transform = '';
+    later(() => {
+      clip.classList.remove('free');
+      letter.classList.remove('glide', 'reading');
+      letter.classList.remove('rise');                          // slides back down inside
+      later(() => { env.classList.remove('open'); scene.classList.remove('opened'); state = 'closed'; }, 700);
+    }, 1200);
   };
 
   env.addEventListener('click', open);

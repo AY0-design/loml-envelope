@@ -16,7 +16,7 @@
     <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the letter">
       <div class="env-back"></div>
 
-      <article class="letter" id="letter" aria-live="polite">
+      <div class="letter-clip" id="clip"><article class="letter" id="letter" aria-live="polite">
         <div class="paper">
           <div class="lines">
             <p class="l date">October 12</p>
@@ -31,7 +31,7 @@
             <p class="l sign">Always yours,<br><span class="heart">&hearts;</span></p>
           </div>
         </div>
-      </article>
+      </article></div>
 
       <div class="env-side left"></div>
       <div class="env-side right"></div>
@@ -41,7 +41,17 @@
         <div class="flap-face flap-out"></div>
         <div class="flap-face flap-in"></div>
       </div>
-      <div class="seal" id="seal" aria-hidden="true"><span>&hearts;</span></div>
+      <div class="seal" id="seal" aria-hidden="true">
+        <svg viewBox="0 0 64 72" width="56" height="63">
+          <defs>
+            <radialGradient id="hg" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#ee7d6e"/><stop offset=".55" stop-color="#c24c3d"/><stop offset="1" stop-color="#8a2e24"/></radialGradient>
+            <linearGradient id="mg" x1="0" x2="1"><stop offset="0" stop-color="#e9d9b0"/><stop offset=".5" stop-color="#b79a5b"/><stop offset="1" stop-color="#e2cf9f"/></linearGradient>
+          </defs>
+          <rect x="26" y="0" width="12" height="14" rx="6" fill="none" stroke="url(#mg)" stroke-width="3.5"/>
+          <path d="M32 66 C8 48 2 34 2 24 C2 14 9 8 17 8 C24 8 29 12 32 18 C35 12 40 8 47 8 C55 8 62 14 62 24 C62 34 56 48 32 66Z" fill="url(#hg)" stroke="#7a261d" stroke-width="1.2"/>
+          <path d="M14 20 C15 15 19 13 23 14" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
     </div>
     <p class="hint" id="hint">tap to open</p>
   </div>
